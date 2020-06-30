@@ -19,7 +19,7 @@ import ListItemToggleStatus from "../components/ListItemToggleStatus";
 import AppText from "../components/AppText";
 import colors from "../components/colors";
 
-function MessagesScreen(props) {
+function MessagesScreen({ visibility }) {
   const [modalState, changeModalState] = useState(false);
 
   const [modalInput, changeModelInput] = useState({ id: 0, text: "" });
@@ -36,6 +36,21 @@ function MessagesScreen(props) {
   const doUpdate = (id, text) => {
     dispatch(updateTodo(id, text));
   };
+
+  const filter = (todos, visibility) => {
+    switch (visibility) {
+      case "COMPLETED":
+        return [...todos].filter((todo) => todo.completed);
+
+      case "INCOMPLETE":
+        return [...todos].filter((todo) => !todo.completed);
+
+      default:
+        return todos;
+    }
+  };
+
+  const Filteredtodos = filter(todos, visibility);
 
   return (
     <Screen>
@@ -78,8 +93,8 @@ function MessagesScreen(props) {
         </View>
       </Modal>
       <FlatList
-        data={todos}
-        keyExtractor={(todos) => todos.id.toString()}
+        data={Filteredtodos}
+        keyExtractor={(Filteredtodos) => Filteredtodos.id.toString()}
         renderItem={({ item }) => (
           <ListItem
             title={item.text.toString()}

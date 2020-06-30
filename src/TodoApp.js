@@ -1,17 +1,13 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import AddTodo from "./containers/AddTodo";
-// import VisibleTodos from "./containers/VisibleTodos";
-// import TodoList from "./containers/TodoList";
-// import MessagesScreen from "./containers/MessagesScreen";
 import TodoEditable from "./containers/TodoEditable";
 
-function TodoApp(props) {
+function TodoApp({ visibility }) {
   return (
     <View style={styles.container}>
       <AddTodo />
-      {/* <MessagesScreen /> */}
-      <TodoEditable />
+      <TodoEditable visibility={visibility} />
     </View>
   );
 }
